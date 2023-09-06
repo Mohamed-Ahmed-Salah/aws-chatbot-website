@@ -13,7 +13,7 @@ Create intent for the weather and add slots for city
 
 # Step 2 Create an S3 
 Create an S3 bucket and upload the files and folders make it public and add the following policy : 
-<!-- {
+
     "Version": "2012-10-17",
     "Statement": [
         {
@@ -27,7 +27,7 @@ Create an S3 bucket and upload the files and folders make it public and add the 
                 "arn:aws:s3:::2019-03-01-er-website/*"
             ]
         }
-    -->
+   
 note: make sure cache-control max-aga=0
 # step 3 Create a cloud front distribution with the bucket name of the S3 website bucket.
 Note bucket policy will update automaticly.
@@ -35,7 +35,7 @@ Select Redirect Http to Https and allowed http methods to GET, Head.
 Default root object text.html
 
 update S3 bucket policy
-<!-- {
+ {
     "Version": "2012-10-17",
     "Statement": [
         {
@@ -48,18 +48,18 @@ update S3 bucket policy
             "Resource": "arn:aws:s3:::Website-bucket/*"
         }
     ]
-} -->
+} 
 
 # Step 4 Create API GATEWAY
 Choose REST protocol as a new API
 Create method post as a mock (will update later)
 update intergration response with 
-<!-- {
+ {
     "temp_int": 69
-} -->
+} 
 Enable CORS and select Default 4xx and 5xx then deploy
 take that api gateway url past it in s3website scripts/config.js
-<!-- var API_GATEWAY_URL_STR = "https://Your-Invoke-URL.execute-api.us-east-1.amazonaws.com/test"; -->
+ var API_GATEWAY_URL_STR = "https://Your-Invoke-URL.execute-api.us-east-1.amazonaws.com/name";
 
 
 # Step 5 Create AWS Lambda Funtion
@@ -67,7 +67,6 @@ create function with name "get_weather"
 create a role from aws policy templates and name it Get-Weather 
 choose "Basic Lambda@Edge Permissions(For CloudFront trigger")
 Updtae your index.js to get city name and return temp
-<!-- 
 function handler(event, context, callback){    
      var 
          city_str = event.city_str,
@@ -79,7 +78,6 @@ function handler(event, context, callback){
      callback(null, response);
  }
  exports.handler = handler;
- -->
 
  Replace API mock endpoint to get_weather lambda function 
  Make sure you enable CORS again and deploy and test weather bot again
@@ -93,7 +91,7 @@ create cities.csv in the enviroment of lambda
 copy cities.md content from the s3website project and paste it in 
 cities.csv
 update index.js to:
-  <!-- exports.handler = function(event, context, callback) { 
+   exports.handler = function(event, context, callback) { 
       var 
       	AWS = require("aws-sdk"),
       	fs = require("fs"),
@@ -127,13 +125,13 @@ update index.js to:
    setTimeout(function(){
        callback(null, "ok");
    }, 1000 * 10);
-  } -->
+  } 
 
   click run and check dynamoDB table.
   update DynamoDB capacity to 1
   delete the lambda function seedDyno
   update the get_weather lambda function index js to query DynamoDb and change time out to 15 secs:
-<!-- 
+
   function handler(event, context, callback){
     var 
         AWS = require("aws-sdk"),
@@ -191,7 +189,7 @@ update index.js to:
         callback(null, response);
     });
 }
-exports.handler = handler;  -->
+exports.handler = handler;  
 
 
 
