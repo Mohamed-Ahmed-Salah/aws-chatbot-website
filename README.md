@@ -1,3 +1,5 @@
+
+https://github.com/Mohamed-Ahmed-Salah/aws-chatbot-website/assets/90526765/6263b7d3-3e88-428a-89cf-3331644ed814
 # Static Website
 
 The goal of this website is to support the learning of the Building Serverless Applications course.
@@ -190,3 +192,9 @@ update index.js to:
     });
 }
 exports.handler = handler;  -->
+
+
+
+https://github.com/Mohamed-Ahmed-Salah/aws-chatbot-website/assets/90526765/31e9c7d2-067e-411b-829a-cf1f88f79dab
+
+
